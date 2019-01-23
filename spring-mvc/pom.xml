@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<!--
+* dependency의 scope 옵션값의 의미
+1. compile : 기본영역으로 아무것도 지정되지 않은 경우 사용됨. compile 의존관계에 있는 것은 프로젝트의 모든 클래스에서 사용가능함. 또한, 이와 같은 의존관계는 의존관계에 있는 프로젝트에 포함됨.
+2. provided : compile 과 매우 유사히지만, 실행시 의존관계를 제공하는 JDK나 컨테이너에 대해서 적용됨. 예를 들어, JEE에 대한 웹 어플리케이션을 만드는 경우, 웹 컨테이너가 서블릿 API와 Java EE API관련 클래스들을 제공하기 때문에 provided 영역으로 의존관계가 세팅되어야 함. 이 영역은 컴파일과 테스트의 클래스패스 용으로 사용되며, 자동영역임.
+3. runtime : 의존관계가 컴파일시 필요하지 않지만, 실행시 필요함을 의미함. 실행시와 테스트 클래스패스에 속하지만, 컴파일 클래스패스에는 속하지 않음.
+4. test : 일반적인 어플리케이션 사용에 대해서는 의존관계가 필요없고, 테스트 컴파일과 실행 시점에만 사용됨.
+5. system : 명시적으로 해당 JAR를 포함하는 것이 제공되어야 한다는 것을 제외하고 provided와 유사함. artifact는 항상 사용가능하며 레파지토리에서 검색하지 않음.
+6. import (Maven 2.0.9 이후에서만 적용) : 이 영역은 <dependencyManagement>에서 pom의 의존관계에 대해서 사용됨. 지정된 POM이 해당 POM의 <dependencyManagement> 영역에 있는 의존관계로 대체됨을 의미함. 이것들이 대체되기 때문에 import 영역의 의존관계들은 실질적으로 의존에 대한 제약에 대해 관여하지 않음.
+ -->
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.reonsoft</groupId>
+	<artifactId>spring</artifactId>
+	<name>spring-mvc</name>
+	<packaging>war</packaging>
+	<version>1.0.0-BUILD-SNAPSHOT</version>
+	
+	<properties>
+		<java-version>1.8</java-version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		
+		<!-- Web -->
+		<jsp.version>2.2</jsp.version>
+		<jstl.version>1.2</jstl.version>
+		<servlet.version>2.5</servlet.version>
+		
+		<!-- Spring -->
+		<spring-framework.version>5.1.4.RELEASE</spring-framework.version>
+		
+		<!-- Hibernate / JPA -->
+		<hibernate.version>5.4.1.Final</hibernate.version>
+		
+		<!-- AspectJ -->
+		<aspectj-version>1.6.10</aspectj-version>
+		
+		<!-- Logging -->
+		<logback.version>1.2.3</logback.version>
+		<slf4j.version>1.7.5</slf4j.version>
+		
+		<!-- Test -->
+		<junit.version>4.12</junit.version>
+		
+		<!-- Tiles 3 -->
+		<tiles.version>3.0.8</tiles.version>
+		
+	</properties>
+	
+	<repositories>
+		<repository>
+			<id>oracle</id>
+			<url>http://maven.jahia.org/maven2</url>
+		</repository>
+	</repositories>
+	<!--
+	<repositories>
+		<repository>
+			<id>oracle</id>
+			<name>ORACLE JDBC Repository</name>
+			<url>https://packages.atlassian.com/maven-3rdparty/</url>
+		</repository>
+	</repositories>
+	-->
+	
+	<dependencies>
+		
+		<!-- Spring -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring-framework.version}</version>
+			<exclusions>
+				<!-- Exclude Commons Logging in favor of SLF4j -->
+				<exclusion>
+					<groupId>commons-logging</groupId>
+					<artifactId>commons-logging</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring-framework.version}</version>
+		</dependency>
+		
+		<!-- AspectJ -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>${aspectj-version}</version>
+		</dependency>
+		
+		<!-- Spring and Transactions -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring-framework.version}</version>
+		</dependency>
+		
+		<!-- jdbc 라이브러리 -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring-framework.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-dbcp2</artifactId>
+			<version>2.5.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc6</artifactId>
+			<version>12.1.0.2</version>
+		</dependency>
+		
+		<!-- DB Mybatis -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.4.6</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis-spring</artifactId>
+			<version>1.3.2</version>
+		</dependency>
+		
+		<!-- 스프링과 MyBitis가 정상적으로 연동되었는지 확인하기 위해 필요한 라이브러리  -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring-framework.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<!-- Logging with SLF4J & LogBack -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>${slf4j.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>${logback.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+		
+		<!-- @Inject -->
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
+		</dependency>
+				
+		<!-- Servlet -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>${servlet.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>${jsp.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>${jstl.version}</version>
+		</dependency>
+		
+		<!-- Hibernate -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+		
+		<!-- Test -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+			<scope>test</scope>
+		</dependency>
+		
+		<!-- UTIL -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>3.0</version>
+		</dependency>
+		
+		<!-- The complete Tiles dependency with all supported technologies is achievable with the following dependency declaration -->
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-extras</artifactId>
+			<version>${tiles.version}</version>
+		</dependency>
+		
+		<!-- The basic Tiles dependency with only servlet support can be added this way -->
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-servlet</artifactId>
+			<version>${tiles.version}</version>
+		</dependency>
+		
+		<!-- If you need a dependency to Tiles JSP support, Declare the dependency this way -->
+		<dependency>
+			<groupId>org.apache.tiles</groupId>
+			<artifactId>tiles-jsp</artifactId>
+			<version>${tiles.version}</version>
+		</dependency>
+		
+	</dependencies>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.9</version>
+				<configuration>
+					<additionalProjectnatures>
+						<projectnature>org.springframework.ide.eclipse.core.springnature</projectnature>
+					</additionalProjectnatures>
+					<additionalBuildcommands>
+						<buildcommand>org.springframework.ide.eclipse.core.springbuilder</buildcommand>
+					</additionalBuildcommands>
+					<downloadSources>true</downloadSources>
+					<downloadJavadocs>true</downloadJavadocs>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.5.1</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+					<compilerArgument>-Xlint:all</compilerArgument>
+					<showWarnings>true</showWarnings>
+					<showDeprecation>true</showDeprecation>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.2.1</version>
+				<configuration>
+					<mainClass>org.test.int1.Main</mainClass>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

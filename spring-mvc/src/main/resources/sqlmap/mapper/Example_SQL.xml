@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+/***********************************************************************
+ * @ 화면명   : 예제 SQL
+ * @ 파일명   : Example_SQL.xml
+ * @ 작성자   : 박해상
+ * @ 작성일   : 2019-01-23
+************************************************************************
+수정일				수정자		수정내용
+************************************************************************
+2019-01-23			모영석		최초작성
+************************************************************************/
+-->
+
+<mapper namespace="com.reonsoft.spring.example.mapper.ExampleMapper">
+	
+	<!-- 직원 목록을 조회한다. -->
+	<select id="selectEMPList" parameterType="EMPVO" resultType="EMPVO">
+	SELECT EMPNO
+		 , ENAME
+		 , JOB
+		 , MGR
+		 , TO_CHAR(HIREDATE, 'YYYYMMDDHH24MISS')
+		 , SAL
+		 , COMM
+		 , DEPTNO
+	  FROM EMP
+	<if test="@com.reonsoft.spring.common.util.ObjectUtils@isEmpty(#{empno})">
+	 WHERE EMPNO = #{empno}
+	</if>
+	</select>
+	
+</mapper>
