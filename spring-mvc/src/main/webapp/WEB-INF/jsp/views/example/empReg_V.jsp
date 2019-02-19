@@ -1,13 +1,13 @@
 <%--
 /***********************************************************************
- * @ 화면명   : 직원 목록
- * @ 파일명   : empList_V.jsp
- * @ 작성자   : 박해상
- * @ 작성일   : 2019-01-23
+ * @ 화면명  : 직원 등록
+ * @ 파일명  : empReg_V.jsp
+ * @ 작성자  : 박해상
+ * @ 작성일  : 2019-01-24
 ************************************************************************
 수정일			수정자		수정내용
 ************************************************************************
-2019-01-23		박해상		최초작성
+2019-01-24		박해상		최초작성
 ************************************************************************/
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
@@ -70,7 +70,7 @@
 </script>
 
 <h1>
-	EMP LIST
+	EMP REG
 </h1>
 <table border="1">
 	<colgroup>
@@ -81,11 +81,9 @@
 	</colgroup>
 	<thead>
 		<tr>
-			<th>EMPNO</th>
 			<th>ENAME</th>
 			<th>JOB</th>
 			<th>MGR</th>
-			<th>HIREDATE</th>
 			<th>SAL</th>
 			<th>COMM</th>
 			<th>DEPTNO</th>
@@ -94,15 +92,15 @@
 	<tbody>
 		<c:forEach items="${empList}" var="list" varStatus="status">
 			<tr>
-				<td>${empList[status.index].empno }</td>
-				<td>${empList[status.index].ename }</td>
-				<td>${empList[status.index].job }</td>
-				<td>${empList[status.index].mgr }</td>
-				<td>${empList[status.index].hiredate }</td>
-				<td>${empList[status.index].sal }</td>
-				<td>${empList[status.index].comm }</td>
-				<td><button type="button" onclick="fn_deptInfoInq('${empList[status.index].deptno }'); return fasle;">회사정보 보기</button></td>
+				<td><input type="text" name="ename" value="" /></td>
+				<td><input type="text" name="job" value="" /></td>
+				<td><input type="text" name="mgr" value="" /></td>
+				<td><input type="text" name="sal" value="" /></td>
+				<td><input type="text" name="comm" value="" /></td>
+				<td></td>
 			</tr>
 		</c:forEach>
 	</tbody>
 </table>
+
+<button></button>

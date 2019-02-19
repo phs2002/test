@@ -2,6 +2,8 @@ package com.reonsoft.spring.example.vo;
 
 import java.io.Serializable;
 
+import com.reonsoft.spring.comm.vo.BaseVO;
+
 public class EMPVO extends BaseVO implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -9,7 +11,7 @@ public class EMPVO extends BaseVO implements Serializable {
 	/**
 	 * EMPNO
 	 */
-	private int empno = 0;
+	private String empno = "";
 	
 	/**
 	 * ENAME
@@ -44,14 +46,14 @@ public class EMPVO extends BaseVO implements Serializable {
 	/**
 	 * DEPTNO
 	 */
-	private int deptno = 0;
+	private String deptno = "";
 	
 	
-	public int getEmpno() {
+	public String getEmpno() {
 		return empno;
 	}
 	
-	public void setEmpno(int empno) {
+	public void setEmpno(String empno) {
 		this.empno = empno;
 	}
 	
@@ -103,11 +105,11 @@ public class EMPVO extends BaseVO implements Serializable {
 		this.comm = comm;
 	}
 	
-	public int getDeptno() {
+	public String getDeptno() {
 		return deptno;
 	}
 
-	public void setDeptno(int deptno) {
+	public void setDeptno(String deptno) {
 		this.deptno = deptno;
 	}
 	

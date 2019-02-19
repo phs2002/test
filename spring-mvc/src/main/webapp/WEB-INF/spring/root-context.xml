@@ -1,16 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	   xmlns:tx="http://www.springframework.org/schema/tx"
-	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-						   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+						http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	
+	<!-- context 네임스페이스를 사용하지않고 property 파일 설정하기 -->
+	<!-- 1. 단일 설정
+	<bean class="org.springframwork.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:/config/config.properties"/>
+		<property name="fileEncoding" value="UTF-8" />
+	</bean>
+	-->
+	<!-- 2. 복수 설정
+	<bean class="org.springframwork.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:/config/config.properties</value>
+				<value>classpath:/config/config2.properties</value>
+			</list>
+		</property>
+		<property name="fileEncoding" value="UTF-8" />
+	</bean>
+	-->
+	<context:property-placeholder location="classpath:/config/config.properties" file-encoding="UTF-8" />
+	<!-- 2개 이상의 프로퍼티를 사용하는 경우 ,(콤마)로 처리 가능
+	<context-property-placeholder location="classpath:/config/config.properties, classpath:/config/config2.properties" file-encoding="UTF-8" />
+	-->
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
-		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
-		<property name="url" value="jdbc:oracle:thin:@192.168.0.200:1521:orcl" />
-		<property name="username" value="scott" />
-		<property name="password" value="tiger" />
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
 	</bean>
 	
 	<!--  classpath 접두사는 접두사 이후의 경로를 src와 resources 순으로 찾는다. -->

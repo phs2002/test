@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+/***********************************************************************
+ * @ 화면명   : 예제 SQL
+ * @ 파일명   : UserLedgerSQL.xml
+ * @ 작성자   : 박해상
+ * @ 작성일   : 2019-01-23
+************************************************************************
+수정일				수정자		수정내용
+************************************************************************
+2019-01-23			모영석		최초작성
+************************************************************************/
+-->
+
+<mapper namespace="com.reonsoft.spring.example.user.mapper.UserMapper">
+	
+	<!-- 회원원장 목록을 조회한다. -->
+	<select id="selectUserLedgerList" parameterType="UserLedgerVO" resultType="UserLedgerVO">
+		SELECT USER_SEQ
+			 , USER_ID
+			 , USER_PW
+			 , USER_NAME
+			 , USER_EMAIL
+			 , USER_PHONE_NB
+			 , USER_ZIP_CODE
+			 , USER_LOAD_ADDR
+			 , USER_ZIP_ADDR
+			 , USER_TYPE
+			 , USER_STATUS
+			 , REG_DATE
+			 , LAST_MOD_DATE 
+		  FROM SCOTT.USER_LEDGER
+		<if test="@com.reonsoft.spring.common.util.ObjectUtils@isNotEmpty(userSeq)">
+		 WHERE USER_SEQ = #{userSeq}
+		</if>
+	</select>
+	
+	<insert id="insertUserLedaer" parameterType="UserLedgerVO">
+		INSERT
+		  INTO USER_LEDGER(USER_SEQ
+						 , USER_ID
+						 , USER_PW
+						 , USER_NAME
+						 , USER_EMAIL
+						 , USER_PHONE_NB
+						 , USER_ZIP_CODE
+						 , USER_LOAD_ADDR
+						 , USER_ZIP_ADDR
+						 , USER_TYPE
+						 , USER_STATUS
+						 , REG_DATE)
+		VALUES(CONCAT(TO_CHAR(SYSDATE, 'YYYY'), LPAD(USER_SEQ_SEQUENCE.CURRVAL, 16, '0')
+			 , #{userId}
+			 , #{userPw}
+			 , #{userName}
+			 , #{userEmail}
+			 , #{userPhoneNb}
+			 , #{userZipCode}
+			 , #{userLoadAddr}
+			 , #{userZipAddr}
+			 , #{userType}
+			 , #{userStatus}
+			 , TO_CHAR(SYSDATE, 'YYYYMMDDHH24MISS'))
+	</insert>
+	
+</mapper>

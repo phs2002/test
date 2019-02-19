@@ -4,7 +4,12 @@ import java.lang.reflect.Array;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class ObjectUtils {
+	
+	private static final Logger logger = LoggerFactory.getLogger(ObjectUtils.class);
 	
 	/**
 	 * Object type 변수가 비어있는지 체크
@@ -13,6 +18,9 @@ public class ObjectUtils {
 	 * @ return Boolean : true / false
 	 */
 	public static Boolean isEmpty(Object obj) {
+		
+		logger.info("isEmpty [" + obj + "]");
+		
 		if(obj instanceof String)
 			return obj == null || "".equals(obj.toString().trim());
 		else if (obj instanceof List)
@@ -32,6 +40,9 @@ public class ObjectUtils {
 	 * @ return Boolean : true / false
 	 */
 	public static Boolean isNotEmpty(Object obj) {
+		
+		logger.info("isNotEmpty [" + !isEmpty(obj) + "]");
+		
 		return !isEmpty(obj);
 	}
 	

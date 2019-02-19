@@ -20,14 +20,37 @@ public class ExampleController {
 	@Resource(name="ExampleService")
 	private ExampleService exampleService;
 	
-	@RequestMapping(value = "/example", method = {RequestMethod.GET, RequestMethod.POST})
-	public String example(Model model, EMPVO vo) throws Exception {
+	@RequestMapping(value = {"/example", "/emp/list"}, method = {RequestMethod.GET, RequestMethod.POST})
+	public String empList(Model model, EMPVO vo) throws Exception {
 		
-		logger.info("call ExampleController example");
+		logger.info("call ExampleController empList");
+		logger.info("EMPVO[" + vo.toString() + "]");
 		
 		model.addAttribute("empList", exampleService.selectEMPList(vo));
 		
 		return "example/empList_V";
+	}
+	
+	@RequestMapping(value = "/emp/reg", method = {RequestMethod.GET, RequestMethod.POST})
+	public String empReg(Model model, EMPVO vo) throws Exception {
+		
+		logger.info("call ExampleController empReg");
+		logger.info("EMPVO[" + vo.toString() + "]");
+		
+		model.addAttribute("empList", exampleService.selectEMPList(vo));
+		
+		return "example/empReg_V";
+	}
+	
+	@RequestMapping(value = "/emp/dtl", method = {RequestMethod.GET, RequestMethod.POST})
+	public String empDtl(Model model, EMPVO vo) throws Exception {
+		
+		logger.info("call ExampleController example");
+		logger.info("EMPVO[" + vo.toString() + "]");
+		
+		model.addAttribute("empList", exampleService.selectEMPList(vo));
+		
+		return "example/empDtl_V";
 	}
 	
 }

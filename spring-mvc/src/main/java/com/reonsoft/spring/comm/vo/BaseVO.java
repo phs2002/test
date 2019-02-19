@@ -1,4 +1,4 @@
-package com.reonsoft.spring.example.vo;
+package com.reonsoft.spring.comm.vo;
 
 import java.io.Serializable;
 
